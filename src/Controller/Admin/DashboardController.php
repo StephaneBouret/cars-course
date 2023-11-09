@@ -2,12 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use App\Entity\Model;
+use App\Entity\Contact;
 use App\Entity\Product;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\ProductCrudController;
-use App\Entity\User;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -44,5 +45,6 @@ class DashboardController extends AbstractDashboardController
         if ($this->IsGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         }
+        yield MenuItem::linkToCrud('Messages', 'fas fa-envelope', Contact::class);
     }
 }
