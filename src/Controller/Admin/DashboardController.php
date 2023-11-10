@@ -9,6 +9,7 @@ use App\Entity\Product;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\ProductCrudController;
+use App\Entity\Images;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -46,5 +47,6 @@ class DashboardController extends AbstractDashboardController
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         }
         yield MenuItem::linkToCrud('Messages', 'fas fa-envelope', Contact::class);
+        yield MenuItem::linkToCrud('Images', 'fas fa-image', Images::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Form\ProductImageFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -12,10 +13,14 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Symfony\Component\Validator\Constraints\Image;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -56,6 +61,9 @@ class ProductCrudController extends AbstractCrudController
                 'Electrique' => 'Electrique',
             ]),
             DateTimeField::new('circulationAt', 'Date de mise en circulation du véhicule')->setFormat('yyyy')->renderAsChoice(),
+            CollectionField::new('images', 'Images du véhicule')
+            ->setEntryType(ProductImageFormType::class)
+            ->hideOnIndex(),
             FormField::addColumn(6),
             TextEditorField::new('shortDescription', 'Description courte du véhicule')->hideOnIndex(),
             AssociationField::new('category', 'Catégorie du véhicule'),
