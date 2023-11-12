@@ -36,6 +36,7 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setFullname(ucwords($form->get('fullname')->getData()));
             $em->persist($comment);
             $em->flush();
 
@@ -49,7 +50,7 @@ class HomeController extends AbstractController
             );
 
             $this->addFlash('success', 'Votre avis a bien été envoyé, il sera publié après validation !');
-            $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('home/notice.html.twig', [

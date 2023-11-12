@@ -22,7 +22,8 @@ class CommentCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
-        $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+        $actions->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->remove(Crud::PAGE_INDEX, Action::EDIT);
         return $actions;
     }
 
@@ -32,7 +33,7 @@ class CommentCrudController extends AbstractCrudController
             IdField::new('id')->onlyOnIndex(),
             TextField::new('fullname', 'Nom complet'),
             TextareaField::new('content', 'Description'),
-            BooleanField::new('isValid', 'A valider'),
+            BooleanField::new('isValid', 'A valider')->onlyOnIndex(),
         ];
     }
 }
