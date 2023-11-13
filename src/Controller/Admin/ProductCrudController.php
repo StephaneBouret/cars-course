@@ -52,7 +52,8 @@ class ProductCrudController extends AbstractCrudController
             TextField::new('name', 'Nom du véhicule'),
             MoneyField::new('price', 'Prix du véhicule')
             ->setCurrency('EUR')
-            ->setTextAlign('left'),
+            ->setTextAlign('left')
+            ->setFormTypeOption('divisor', 100),
             NumberField::new('kilometers', 'Kilométrage du véhicule')->setNumDecimals(0),
             ChoiceField::new('energy', 'Motorisation du véhicule')->setChoices([
                 'Essence' => 'Essence',

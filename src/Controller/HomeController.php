@@ -4,8 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentFormType;
-use App\Repository\CommentRepository;
 use App\Service\SendMailService;
+use App\Repository\CommentRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,14 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
-    public function index(CommentRepository $commentRepository): Response
+    public function index(CommentRepository $commentRepository, ProductRepository $productRepository): Response
     {
+        $products = $productRepository->findBy([], [], 3);
+
         $comments = $commentRepository->findBy(['isValid' => true], ['createdAt' => 'DESC']);
+
         $averageRating = $commentRepository->averageRating();
 
         return $this->render('home/index.html.twig', [
             'comments' => $comments,
-            'averageRating' => $averageRating
+            'averageRating' => $averageRating,
+            'products' => $products
         ]);
     }
 

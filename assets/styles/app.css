@@ -72,3 +72,79 @@
 span.rating i {
     color: gold;
 }
+
+#carouselSingleVehiculeIndicators {
+    max-width: 100%;
+}
+
+/* nav-tabs */
+.nav-tabs-bordered {
+    border-bottom: 2px solid #ebeef4 !important;
+}
+
+.nav-tabs-bordered .nav-link {
+    border: none;
+    color: #2c384e;
+    margin-bottom: -2px
+}
+
+.nav-tabs-bordered .nav-link:focus,.nav-tabs-bordered .nav-link:hover {
+    color: #4154f1
+}
+
+.nav-tabs-bordered .nav-link.active {
+    background-color: #fff;
+    border-bottom: 2px solid #4154f1;
+    color: #4154f1
+}
+
+/* filters */
+.box {
+    padding: 10px;
+}
+
+#collapseSections,
+#collapseNavigation {
+    height: 300px;
+    margin-right: 0.3rem !important;
+    overflow-y: scroll;
+}
+
+#collapseSections::-webkit-scrollbar,
+#collapseNavigation::-webkit-scrollbar {
+    width: 6px;
+}
+
+#collapseSections::-webkit-scrollbar-thumb,
+#collapseNavigation::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 2px;
+}
+
+#collapseSections::-webkit-scrollbar-track,
+#collapseNavigation::-webkit-scrollbar-track {
+    background-color: #ddd;
+    border-radius: 2px;
+}
+
+.box-label {
+    color: #1d2939;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.box-label .btn {
+    background-color: #fff;
+    padding: 0;
+}
+
+.box-label .btn:focus {
+    box-shadow: none;
+}
+
+.box-label .btn:active,
+.box-label .btn:hover {
+    color: #212529;
+    background-color: #fff;
+    border-color: transparent;
+}

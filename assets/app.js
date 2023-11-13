@@ -10,7 +10,108 @@ import './styles/app.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 require('bootstrap');
+// Range Slider
+import noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
 import { Carousel } from "bootstrap";
+
+const priceSlider = document.getElementById('price-slider');
+const kmsSlider = document.getElementById('kms-slider');
+const dateSlider = document.getElementById('date-slider');
+
+if (priceSlider) {
+    const min = document.getElementById('minPrice');
+    const max = document.getElementById('maxPrice');
+    const minValue = Math.floor(parseInt(priceSlider.dataset.min, 10) / 100);
+    const maxValue = Math.ceil(parseInt(priceSlider.dataset.max, 10) / 100);
+    const range = noUiSlider.create(priceSlider, {
+        start: [min.value || minValue, max.value || maxValue],
+        connect: true,
+        step: 10,
+        range: {
+            'min': minValue,
+            'max': maxValue
+        }
+    });
+    range.on('slide', function (values, handle) {
+        if (handle === 0) {
+            min.value = Math.round(values[0])
+        }
+        if (handle === 1) {
+            max.value = Math.round(values[1])
+        }
+    })
+    range.on('end', function (values, handle) {
+        if (handle === 0) {
+            min.dispatchEvent(new Event('change'))
+        } else {
+            max.dispatchEvent(new Event('change'))
+        }
+    })
+}
+
+if (kmsSlider) {
+    const min = document.getElementById('minKms');
+    const max = document.getElementById('maxKms');
+    const minValue = Math.floor(parseInt(kmsSlider.dataset.min, 10));
+    const maxValue = Math.ceil(parseInt(kmsSlider.dataset.max, 10));
+    const range = noUiSlider.create(kmsSlider, {
+        start: [min.value || minValue, max.value || maxValue],
+        connect: true,
+        step: 10,
+        range: {
+            'min': minValue,
+            'max': maxValue
+        }
+    });
+    range.on('slide', function (values, handle) {
+        if (handle === 0) {
+            min.value = Math.round(values[0])
+        }
+        if (handle === 1) {
+            max.value = Math.round(values[1])
+        }
+    })
+    range.on('end', function (values, handle) {
+        if (handle === 0) {
+            min.dispatchEvent(new Event('change'))
+        } else {
+            max.dispatchEvent(new Event('change'))
+        }
+    })
+}
+
+if (dateSlider) {
+    const min = document.getElementById('minCirculationAt');
+    const max = document.getElementById('maxCirculationAt');
+    const minValue = 2013;
+    const maxValue = 2023;
+    const range = noUiSlider.create(dateSlider, {
+        start: [min.value || minValue, max.value || maxValue],
+        connect: true,
+        step: 1,
+        range: {
+            'min': minValue,
+            'max': maxValue
+        }
+    });
+    range.on('slide', function (values, handle) {
+        if (handle === 0) {
+            min.value = Math.round(values[0])
+        }
+        if (handle === 1) {
+            max.value = Math.round(values[1])
+        }
+        console.log(values, handle);
+    })
+    range.on('end', function (values, handle) {
+        if (handle === 0) {
+            min.dispatchEvent(new Event('change'))
+        } else {
+            max.dispatchEvent(new Event('change'))
+        }
+    })
+}
 
 // Close alert message after 5 secondes
 const alert = document.querySelector('.alert')
