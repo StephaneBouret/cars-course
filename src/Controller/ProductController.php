@@ -56,13 +56,14 @@ class ProductController extends AbstractController
         $form = $this->createForm(SearchFormType::class, $data);
         $form->handleRequest($request);
 
-        $minDate = new DateTime('Y');
-        $maxDate = new DateTime('Y');
+        // $minDate = new DateTime('Y');
+        // $maxDate = new DateTime('Y');
 
         [$minPrice, $maxPrice] = $productRepository->findMinMaxPrice($data);
         [$minKms, $maxKms] = $productRepository->findMinMaxKms($data);
         [$minDate, $maxDate] = $productRepository->findMinMaxDate($data);
         $products = $productRepository->findSearch($data);
+        $totalItems = $productRepository->countItems($data);
         return $this->render('product/display.html.twig', [
             'products' => $products,
             'form' => $form,
@@ -72,6 +73,7 @@ class ProductController extends AbstractController
             'maxKms' => $maxKms,
             'minDate' => $minDate,
             'maxDate' => $maxDate,
+            'totalItems' => $totalItems,
         ]);
     }
 }

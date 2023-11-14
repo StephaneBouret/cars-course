@@ -84,8 +84,11 @@ if (kmsSlider) {
 if (dateSlider) {
     const min = document.getElementById('minCirculationAt');
     const max = document.getElementById('maxCirculationAt');
-    const minValue = 2013;
-    const maxValue = 2023;
+    const timestamp = (str) => {
+        return new Date(str).getFullYear()
+    }
+    const minValue = parseInt(timestamp(dateSlider.dataset.min), 10);
+    const maxValue = parseInt(timestamp(dateSlider.dataset.max), 10);
     const range = noUiSlider.create(dateSlider, {
         start: [min.value || minValue, max.value || maxValue],
         connect: true,
@@ -102,7 +105,6 @@ if (dateSlider) {
         if (handle === 1) {
             max.value = Math.round(values[1])
         }
-        console.log(values, handle);
     })
     range.on('end', function (values, handle) {
         if (handle === 0) {
