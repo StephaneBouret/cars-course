@@ -13,7 +13,10 @@ require('bootstrap');
 // Range Slider
 import noUiSlider from 'nouislider';
 import 'nouislider/dist/nouislider.css';
+import Filter from './js/modules/Filter.js';
 import { Carousel } from "bootstrap";
+
+new Filter(document.querySelector('.js-filter'))
 
 const priceSlider = document.getElementById('price-slider');
 const kmsSlider = document.getElementById('kms-slider');

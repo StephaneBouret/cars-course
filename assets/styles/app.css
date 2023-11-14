@@ -24,7 +24,8 @@
     position: relative;
 }
 
-.header-titles::before, .header-titles::after {
+.header-titles::before,
+.header-titles::after {
     background-color: #cc342b;
     height: 2px;
     width: 10%;
@@ -88,7 +89,8 @@ span.rating i {
     margin-bottom: -2px
 }
 
-.nav-tabs-bordered .nav-link:focus,.nav-tabs-bordered .nav-link:hover {
+.nav-tabs-bordered .nav-link:focus,
+.nav-tabs-bordered .nav-link:hover {
     color: #4154f1
 }
 
@@ -147,4 +149,36 @@ span.rating i {
     color: #212529;
     background-color: #fff;
     border-color: transparent;
+}
+
+/*--------------------------------------------------------------
+# Filters
+--------------------------------------------------------------*/
+.filter {
+    display: block;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+}
+
+/*--------------------------------------------------------------
+  # Spinner
+  --------------------------------------------------------------*/
+.is-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #FFF;
+    opacity: 0.5;
+    z-index: 4;
+}
+
+.is-loading .spinner-border {
+    position: absolute;
+    top: calc(50% - 1rem);
+    left: calc(50% - 1rem);
+    z-index: 5;
 }
