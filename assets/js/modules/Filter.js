@@ -8,6 +8,7 @@ import {
  * @property {HTMLElement} content
  * @property {HTMLElement} sorting
  * @property {HTMLFormElement} form
+ * @property {HTMLElement} reset
  */
 export default class Filter {
     /**
@@ -22,6 +23,7 @@ export default class Filter {
         this.content = element.querySelector('.js-filter-content')
         this.sorting = element.querySelector('.js-filter-sorting')
         this.form = element.querySelector('.js-filter-form')
+        this.reset = element.querySelector('#resetBtn')
         this.bindEvents()
     }
 
@@ -41,6 +43,7 @@ export default class Filter {
             input.addEventListener('change', this.loadForm.bind(this))
         })
         this.form.querySelector('#q').addEventListener('keyup', this.loadForm.bind(this))
+        this.reset.addEventListener('click', this.resetForm.bind(this))
     }
 
     async loadForm() {
@@ -75,6 +78,13 @@ export default class Filter {
             console.error(response)
         }
         this.hideLoader()
+    }
+
+    resetForm() {
+        // Reset the form elements
+        this.form.reset();
+        // After resetting the form, trigger the form submission to update the content
+        this.loadForm();
     }
 
     showLoader() {
