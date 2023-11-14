@@ -182,3 +182,18 @@ span.rating i {
     left: calc(50% - 1rem);
     z-index: 5;
 }
+
+.star-rating i {
+    cursor: pointer;
+}
+
+.star-rating > i.far.fa-star {
+    font-size: 24px;
+    color: #ccc;
+    transition: color 0.3s ease-in-out;
+}
+
+.star-rating > i.fa-star.fas {
+    font-size: 24px;
+    color: #f8d32b;
+}

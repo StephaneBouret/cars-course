@@ -13,9 +13,15 @@
 			{{ form_errors(form) }}
 			{{ form_row(form.fullname) }}
 			{{ form_row(form.content) }}
+			<div class="star-rating mb-3">
+				<span>Notre sur 5 :</span>
+				{% for i in 1..5 %}
+					<i class="far fa-star" data-rating="{{ i }}"></i>
+				{% endfor %}
+			</div>
 			{{ form_row(form.rating) }}
 
-            <button type="submit" class="btn btn-success">Envoyez</button>
+			<button type="submit" class="btn btn-success">Envoyez</button>
 			{{ form_end(form) }}
 		</div>
 	</div>
