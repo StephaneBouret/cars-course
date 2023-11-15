@@ -1,4 +1,4 @@
-.card-title {
+.card.mb-3.me-2 > .card-body > .card-title {
     height: 90px;
 }
 
