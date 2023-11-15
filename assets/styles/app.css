@@ -2,6 +2,9 @@
     height: 90px;
 }
 
+/*--------------------------------------------------------------
+  # Testimonials
+  --------------------------------------------------------------*/
 .testimonial {
     width: 80%;
     margin: 0 auto;
@@ -16,6 +19,9 @@
     }
 }
 
+/*--------------------------------------------------------------
+  # Show car
+  --------------------------------------------------------------*/
 .header-titles {
     text-align: center;
     margin: 10px 0 20px;
@@ -79,7 +85,56 @@ span.rating i {
     max-width: 100%;
 }
 
-/* nav-tabs */
+.show-detailed-car {
+    display: grid;
+    gap: 20px;
+    grid-template-areas: "header";
+    grid-template-columns: repeat(1,1fr);
+}
+
+@media (min-width: 768px) {
+    .show-detailed-car {
+        grid-template-areas: "header header" "content content";
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+.grid-header {
+    grid-area: header/header/header/header;
+}
+
+.mw-0 {
+    min-width: 0;
+}
+
+.detailed-items-car {
+    align-items: flex-start;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+@media (min-width: 768px) {
+    .detailed-items-car {
+        flex-wrap: nowrap;
+    }
+}
+
+.refunded-content {
+    flex: 1 1 100%;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .refunded-content {
+        flex-basis: 50%;
+    }
+}
+
+/*--------------------------------------------------------------
+  # Nav-tabs
+  --------------------------------------------------------------*/
 .nav-tabs-bordered {
     border-bottom: 2px solid #ebeef4 !important;
 }
@@ -101,7 +156,9 @@ span.rating i {
     color: #4154f1
 }
 
-/* filters */
+/*--------------------------------------------------------------
+  # Filters
+  --------------------------------------------------------------*/
 .box {
     padding: 10px;
 }
@@ -152,9 +209,6 @@ span.rating i {
     border-color: transparent;
 }
 
-/*--------------------------------------------------------------
-# Filters
---------------------------------------------------------------*/
 .filter {
     display: block;
     position: -webkit-sticky;

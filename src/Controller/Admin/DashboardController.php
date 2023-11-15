@@ -12,6 +12,7 @@ use App\Entity\Product;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\Admin\ProductCrudController;
+use App\Entity\Color;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -46,6 +47,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Catégorie', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Marques', 'fas fa-trademark', Model::class);
         yield MenuItem::linkToCrud('Modèles', 'fas fa-car-battery', Type::class);
+        yield MenuItem::linkToCrud('Couleurs', 'fas fa-palette', Color::class);
         if ($this->IsGranted('ROLE_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         }
