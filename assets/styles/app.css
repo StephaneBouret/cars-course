@@ -1,6 +1,7 @@
 .card-title {
     height: 90px;
 }
+
 .testimonial {
     width: 80%;
     margin: 0 auto;
@@ -187,13 +188,51 @@ span.rating i {
     cursor: pointer;
 }
 
-.star-rating > i.far.fa-star {
+.star-rating>i.far.fa-star {
     font-size: 24px;
     color: #ccc;
     transition: color 0.3s ease-in-out;
 }
 
-.star-rating > i.fa-star.fas {
+.star-rating>i.fa-star.fas {
     font-size: 24px;
     color: #f8d32b;
+}
+
+/*--------------------------------------------------------------
+# Error 404
+--------------------------------------------------------------*/
+.error-404 {
+    padding: 30px;
+}
+
+.error-404 h1 {
+    font-size: 180px;
+    font-weight: 700;
+    color: #4154f1;
+    margin-bottom: 0;
+    line-height: 150px;
+}
+
+.error-404 h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #012970;
+    margin-bottom: 30px;
+}
+
+.error-404 .btn {
+    background: #51678f;
+    color: #fff;
+    padding: 8px 30px;
+}
+
+.error-404 .btn:hover {
+    background: #3e4f6f;
+}
+
+@media (min-width: 992px) {
+    .error-404 img {
+        max-width: 50%;
+    }
 }
