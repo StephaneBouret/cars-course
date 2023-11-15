@@ -59,6 +59,9 @@ class Product
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Images::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $images;
 
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Type $type = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -210,5 +213,17 @@ class Product
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
+
+        return $this;
     }
 }
