@@ -112,35 +112,35 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('q', "%{$search->q}%");
         }
 
-        if (!empty($search->minPrice) && ($ignorePrice === false || $ignoreKms === false || $ignoreDate === false)) {
+        if (!empty($search->minPrice) && $ignorePrice === false && $ignoreKms === false && $ignoreDate === false) {
             $min = ($search->minPrice) * 100;
             $query = $query
                 ->andWhere('p.price >= :min')
                 ->setParameter('min', $min);
         }
 
-        if (!empty($search->maxPrice) && ($ignorePrice === false || $ignoreKms === false || $ignoreDate === false)) {
+        if (!empty($search->maxPrice) && $ignorePrice === false && $ignoreKms === false && $ignoreDate === false) {
             $max = ($search->maxPrice) * 100;
             $query = $query
                 ->andWhere('p.price <= :max')
                 ->setParameter('max', $max);
         }
 
-        if (!empty($search->minKms) && ($ignorePrice === false || $ignoreKms === false || $ignoreDate === false)) {
+        if (!empty($search->minKms) && $ignorePrice === false && $ignoreKms === false && $ignoreDate === false) {
             $minKms = ($search->minKms);
             $query = $query
                 ->andWhere('p.kilometers >= :minKms')
                 ->setParameter('minKms', $minKms);
         }
 
-        if (!empty($search->maxKms) && ($ignorePrice === false || $ignoreKms === false || $ignoreDate === false)) {
+        if (!empty($search->maxKms) && $ignorePrice === false && $ignoreKms === false && $ignoreDate === false) {
             $maxKms = ($search->maxKms);
             $query = $query
                 ->andWhere('p.kilometers <= :maxKms')
                 ->setParameter('maxKms', $maxKms);
         }
 
-        if (!empty($search->minCirculationAt) && ($ignorePrice === false || $ignoreKms === false || $ignoreDate === false)) {
+        if (!empty($search->minCirculationAt) && $ignorePrice === false && $ignoreKms === false && $ignoreDate === false) {
             $minDate = ($search->minCirculationAt);
             dump($minDate);
             $query = $query
@@ -148,7 +148,7 @@ class ProductRepository extends ServiceEntityRepository
                 ->setParameter('minDate', $minDate);
         }
 
-        if (!empty($search->maxCirculationAt) && ($ignorePrice === false || $ignoreKms === false || $ignoreDate === false)) {
+        if (!empty($search->maxCirculationAt) && $ignorePrice === false && $ignoreKms === false && $ignoreDate === false) {
             $maxDate = ($search->maxCirculationAt);
             dump($maxDate);
             $query = $query
