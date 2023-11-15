@@ -61,9 +61,10 @@ class ProductController extends AbstractController
         [$minKms, $maxKms] = $productRepository->findMinMaxKms($data);
         [$minDate, $maxDate] = $productRepository->findMinMaxDate($data);
         $products = $productRepository->findSearch($data);
-        // $totalItems = $productRepository->countItems($data);
-
+        // Count items with search criteria
+        $totalItems = $productRepository->countItems($data);
         if ($request->get('ajax')) {
+            $totalItems = $productRepository->countItems($data);
             return new JsonResponse([
                 'content' => $this->renderView('product/_products.html.twig', [
                     'products' => $products,
@@ -76,6 +77,7 @@ class ProductController extends AbstractController
                 'maxKms' => $maxKms,
                 'minDate' => $minDate,
                 'maxDate' => $maxDate,
+                'totalItems' => $totalItems,
             ]);
         }
         return $this->render('product/display.html.twig', [
@@ -87,7 +89,7 @@ class ProductController extends AbstractController
             'maxKms' => $maxKms,
             'minDate' => $minDate,
             'maxDate' => $maxDate,
-            // 'totalItems' => $totalItems,
+            'totalItems' => $totalItems,
         ]);
     }
 }

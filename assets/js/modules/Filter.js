@@ -71,6 +71,8 @@ export default class Filter {
             // this.content.innerHTML = data.content
             this.sorting.innerHTML = data.sorting
             this.pagination.innerHTML = data.pagination
+            // Update totalItems in display template
+            document.getElementById('totalItems').innerText = data.totalItems + ' résultat(s)';
             // params contient l'url
             params.delete('ajax') // On ne veut pas que le paramètre "ajax" se retrouve dans l'URL
             history.replaceState({}, '', url.split('?')[0] + '?' + params.toString())
