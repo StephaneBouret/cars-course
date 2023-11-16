@@ -12,10 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
-    public const STATUS_GASOLINE = 'Essence';
-    public const STATUS_DIESEL = 'Diesel';
-    public const STATUS_HYBRID = 'Hybride';
-    public const STATUS_ELECTRIC = 'Electrique';
     public const STATUS_AUTOMATIC = 'Automatique';
     public const STATUS_MANUAL = 'Manuelle';
     public const STATUS_LEVEL_0 = 'Niveau 0';
@@ -43,10 +39,6 @@ class Product
     #[ORM\Column]
     #[Assert\NotBlank(message: 'Le kilométrage du véhicule est obligatoire !')]
     private ?int $kilometers = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'La motorisation du véhicule est obligatoire !')]
-    private ?string $energy = 'Essence';
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank(message: "La description courte est obligatoire")]
@@ -76,12 +68,14 @@ class Product
     #[Assert\NotBlank(message: 'La puissance fiscale est obligatoire !')]
     private ?string $fiscalhorsepower = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le critair est obligatoire !')]
-    private ?string $critair = null;
-
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Color $color = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Energy $energy = null;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Critair $critair = null;
 
     public function __construct()
     {
@@ -137,18 +131,6 @@ class Product
     public function setKilometers(int $kilometers): static
     {
         $this->kilometers = $kilometers;
-
-        return $this;
-    }
-
-    public function getEnergy(): ?string
-    {
-        return $this->energy;
-    }
-
-    public function setEnergy(string $energy): static
-    {
-        $this->energy = $energy;
 
         return $this;
     }
@@ -272,18 +254,6 @@ class Product
         return $this;
     }
 
-    public function getCritair(): ?string
-    {
-        return $this->critair;
-    }
-
-    public function setCritair(string $critair): static
-    {
-        $this->critair = $critair;
-
-        return $this;
-    }
-
     public function getColor(): ?Color
     {
         return $this->color;
@@ -292,6 +262,30 @@ class Product
     public function setColor(?Color $color): static
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    public function getEnergy(): ?Energy
+    {
+        return $this->energy;
+    }
+
+    public function setEnergy(?Energy $energy): static
+    {
+        $this->energy = $energy;
+
+        return $this;
+    }
+
+    public function getCritair(): ?Critair
+    {
+        return $this->critair;
+    }
+
+    public function setCritair(?Critair $critair): static
+    {
+        $this->critair = $critair;
 
         return $this;
     }

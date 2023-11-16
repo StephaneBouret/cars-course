@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Form\Type\CustomDateType;
 use App\Form\ProductImageFormType;
-use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -14,7 +13,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use Symfony\Component\String\Slugger\SluggerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -22,14 +20,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ProductCrudController extends AbstractCrudController
 {
-    protected $slugger;
-
-    public function __construct(SluggerInterface $slugger)
-    {
-        $this->slugger = $slugger;
-    }
-
-
     public static function getEntityFqcn(): string
     {
         return Product::class;
@@ -55,12 +45,13 @@ class ProductCrudController extends AbstractCrudController
             ->setTextAlign('left')
             ->setFormTypeOption('divisor', 100),
             NumberField::new('kilometers', 'Kilométrage du véhicule')->setNumDecimals(0),
-            ChoiceField::new('energy', 'Motorisation du véhicule')->setChoices([
-                'Essence' => 'Essence',
-                'Diesel' => 'Diesel',
-                'Hybride' => 'Hybride',
-                'Electrique' => 'Electrique',
-            ]),
+            // ChoiceField::new('energy', 'Motorisation du véhicule')->setChoices([
+            //     'Essence' => 'Essence',
+            //     'Diesel' => 'Diesel',
+            //     'Hybride' => 'Hybride',
+            //     'Electrique' => 'Electrique',
+            // ]),
+            AssociationField::new('energy', 'Motorisation du véhicule')->autocomplete(),
             DateField::new('circulationAt', 'Date de mise en circulation du véhicule')
             ->setFormType(CustomDateType::class)
             ->setFormat('yyyy')
@@ -76,37 +67,12 @@ class ProductCrudController extends AbstractCrudController
                 'Manuelle' => 'Manuelle',
             ]),
             TextField::new('fiscalhorsepower', 'Puissance fiscale')->hideOnIndex(),
-            ChoiceField::new('critair', 'CRIT\'AIR')->hideOnIndex()->setChoices([
-                'Niveau 0' => 'Niveau 0',
-                'Niveau 1' => 'Niveau 1',
-                'Niveau 2' => 'Niveau 2',
-                'Niveau 3' => 'Niveau 3',
-            ]),
+            AssociationField::new('critair', 'CRIT\'AIR')->hideOnIndex()->autocomplete(),
             TextEditorField::new('shortDescription', 'Description courte du véhicule')->hideOnIndex(),
             AssociationField::new('category', 'Catégorie du véhicule'),
             AssociationField::new('model', 'Marque du véhicule')
                 ->autocomplete(),
             AssociationField::new('type', 'Modèle du véhicule')->autocomplete()->hideOnIndex(),
         ];
-    }
-
-    public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        $this->sluggerName($entityInstance);
-        // Apply ucfirst to relevant fields
-        $entityInstance->setName(ucfirst($entityInstance->getName()));
-        parent::persistEntity($entityManager, $entityInstance);
-    }
-
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        $this->sluggerName($entityInstance);
-        $entityInstance->setName(ucfirst($entityInstance->getName()));
-        parent::updateEntity($entityManager, $entityInstance);
-    }
-
-    private function sluggerName(Product $product): void
-    {
-        $product->setSlug(strtolower($this->slugger->slug($product->getName())));
     }
 }
