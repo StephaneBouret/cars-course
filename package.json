@@ -22,5 +22,8 @@
     "dependencies": {
         "flip-toolkit": "^7.1.0",
         "nouislider": "^15.7.1"
+    },
+    "engines": {
+        "node": "18.17.1"
     }
 }
