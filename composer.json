@@ -76,8 +76,8 @@
         "post-install-cmd": [
             "@auto-scripts",
             "@database-setup",
-            "npm install",
-            "npm run build"
+            "[ -x \"$(command -v npm)\" ] && npm install || echo \"npm not found. Skipping npm install.\"",
+            "[ -x \"$(command -v npm)\" ] && npm run build || echo \"npm not found. Skipping npm run build.\""
         ],
         "post-update-cmd": [
             "@auto-scripts"
