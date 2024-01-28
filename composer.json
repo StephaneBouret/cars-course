@@ -73,13 +73,11 @@
         "database-setup": [
             "php bin/console doctrine:migrations:migrate --no-interaction"
         ],
-        "heroku-postbuild" : [
-            "encore production --progress"
-        ],
         "post-install-cmd": [
             "@auto-scripts",
             "@database-setup",
-            "@heroku-postbuild"
+            "npm install",
+            "npm run build"
         ],
         "post-update-cmd": [
             "@auto-scripts"
